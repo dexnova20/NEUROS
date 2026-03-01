@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeuroAdaptiveOS Demo - Cognitive Load Simulation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #333;
+    }
+
+    /* Demo explanation banner */
+    .demo-banner {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .demo-banner h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .demo-banner p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 250px;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .main-content {
+      background: white;
+    }
+
+    .sidebar {
+      background: #f5f5f5;
+      padding: 15px;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    /* Section 1: Dense Academic Text */
+    .dense-section {
+      background: #fafafa;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .dense-section h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #222;
+    }
+
+    .dense-section p {
+      font-size: 12px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    /* Section 2: Low Contrast */
+    .low-contrast-section {
+      background: #e8e8e8;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #d0d0d0;
+    }
+
+    .low-contrast-section h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #999;
+    }
+
+    .low-contrast-section p {
+      font-size: 13px;
+      line-height: 1.4;
+      color: #aaa;
+      margin-bottom: 5px;
+    }
+
+    /* Section 3: Small Font Section */
+    .small-font-section {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .small-font-section h2 {
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: #222;
+    }
+
+    .small-font-section p {
+      font-size: 11px;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: #444;
+      margin-bottom: 4px;
+    }
+
+    /* Section 4: Confusing Form */
+    .form-section {
+      background: #f9f9f9;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .form-section h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .form-group {
+      margin-bottom: 8px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 2px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 4px 6px;
+      font-size: 11px;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+    }
+
+    /* Sidebar clutter */
+    .sidebar h3 {
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .sidebar-button {
+      display: block;
+      width: 100%;
+      padding: 6px;
+      margin-bottom: 6px;
+      font-size: 10px;
+      background: #e0e0e0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .ad-block {
+      background: #fff3cd;
+      border: 2px dashed #ffc107;
+      padding: 10px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .ad-block p {
+      font-size: 10px;
+      color: #856404;
+      margin-bottom: 5px;
+    }
+
+    .floating-element {
+      position: fixed;
+      background: #ff6b6b;
+      color: white;
+      padding: 8px 12px;
+      font-size: 11px;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      z-index: 1000;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .floating-1 { top: 150px; right: 50px; }
+    .floating-2 { top: 400px; right: 80px; animation-delay: 1s; }
+    .floating-3 { top: 650px; right: 60px; animation-delay: 2s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Instructions box */
+    .instructions {
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .instructions h3 {
+      font-size: 16px;
+      color: #1976d2;
+      margin-bottom: 8px;
+    }
+
+    .instructions p {
+      font-size: 13px;
+      color: #0d47a1;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Demo Banner -->
+  <div class="demo-banner">
+    <h1>🧠 NeuroAdaptiveOS Demo Page</h1>
+    <p>This page is intentionally designed to simulate high cognitive load for demonstration purposes.</p>
+    <p>Scroll, click, and interact to trigger adaptive UI transformations.</p>
+  </div>
+
+  <!-- Instructions -->
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div class="instructions">
+      <h3>📋 Demo Instructions</h3>
+      <p><strong>Step 1:</strong> Scroll rapidly up and down this page multiple times.</p>
+      <p><strong>Step 2:</strong> Click various elements (buttons, links, text) repeatedly.</p>
+      <p><strong>Step 3:</strong> Watch the floating panel in bottom-right corner.</p>
+      <p><strong>Step 4:</strong> When score > 0.75, UI will adapt: larger text, more spacing, calmer background.</p>
+      <p><strong>Quick Demo:</strong> Click "Simulate High" button in the floating panel for instant transformation!</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Main Content -->
+    <div class="main-content">
+
+      <!-- Section 1: Dense Academic Text -->
+      <div class="dense-section">
+        <h2>Section 1: Dense Academic Content (High Cognitive Load)</h2>
+        <p>The epistemological ramifications of phenomenological hermeneutics in contemporary post-structuralist discourse necessitate a comprehensive reevaluation of ontological presuppositions underlying traditional metaphysical frameworks. This paradigmatic shift, characterized by its inherent dialectical tensions, manifests through multifaceted interpretative schemas that challenge conventional axiological hierarchies.</p>
+        <p>Furthermore, the intersubjective dimensions of socio-cultural constructs, when examined through the lens of critical theory, reveal underlying power dynamics that perpetuate hegemonic narratives. These narratives, deeply embedded within institutional frameworks, require systematic deconstruction to unveil their ideological underpinnings and facilitate emancipatory praxis.</p>
+        <p>The methodological implications of this analytical approach extend beyond mere theoretical abstraction, encompassing practical applications in diverse disciplinary contexts. By interrogating the foundational assumptions that govern knowledge production, we can develop more nuanced understandings of complex phenomena that resist reductionist explanations.</p>
+        <p>Moreover, the integration of interdisciplinary perspectives facilitates a more holistic comprehension of multidimensional problems that transcend traditional categorical boundaries. This synthetic approach, while methodologically challenging, offers unprecedented opportunities for innovative theoretical developments and practical interventions.</p>
+      </div>
+
+      <!-- Section 2: Low Contrast -->
+      <div class="low-contrast-section">
+        <h2>Section 2: Low Contrast Text (Visual Strain)</h2>
+        <p>This section intentionally uses low contrast between text and background to simulate visual fatigue and increased cognitive effort. Reading light gray text on a slightly lighter background requires significantly more mental energy and can lead to eye strain and reduced comprehension rates.</p>
+        <p>Studies have shown that poor contrast ratios can reduce reading speed by up to 30% and increase error rates in information processing tasks. This is particularly problematic for users with visual impairments or those working in suboptimal lighting conditions.</p>
+        <p>The cumulative effect of sustained exposure to low-contrast text includes headaches, decreased focus, and overall cognitive fatigue. These factors contribute to reduced productivity and increased mental load during extended reading sessions.</p>
+      </div>
+
+      <!-- Section 3: Small Font -->
+      <div class="small-font-section">
+        <h2>Section 3: Extremely Small Font (Reading Difficulty)</h2>
+        <p>This paragraph uses an 11px font size with tight letter spacing and minimal line height, making it extremely difficult to read comfortably. The reduced font size forces users to squint and lean closer to the screen, increasing physical and mental strain. This type of typography is commonly found on websites trying to fit excessive amounts of information into limited space, but it significantly impairs readability and user experience.</p>
+        <p>When text is this small, the eye muscles must work harder to focus, leading to faster fatigue. Additionally, the tight spacing between letters and lines makes it easy to lose your place while reading, requiring frequent re-reading and reducing overall comprehension. This is especially problematic for users with presbyopia or other age-related vision changes.</p>
+        <p>The cognitive cost of processing small text is substantial. Research indicates that font sizes below 12px can increase reading time by 20-40% and significantly reduce retention of information. Users must expend additional mental resources just to decode the visual information, leaving less cognitive capacity for understanding and analyzing the content itself.</p>
+        <p>Furthermore, prolonged exposure to small text can cause digital eye strain, characterized by dry eyes, blurred vision, and headaches. These physical symptoms compound the cognitive load, creating a negative feedback loop that further impairs performance and user satisfaction.</p>
+      </div>
+
+      <!-- Section 4: Confusing Form -->
+      <div class="form-section">
+        <h2>Section 4: Complex Form (Cognitive Overload)</h2>
+        <div class="form-group">
+          <label>Primary Residential Address Line 1 (Street Number and Name):</label>
+          <input type="text" placeholder="Enter street address">
+        </div>
+        <div class="form-group">
+          <label>Secondary Address Information (Apt/Suite/Unit):</label>
+          <input type="text" placeholder="Optional">
+        </div>
+        <div class="form-group">
+          <label>Municipality/City/Town Designation:</label>
+          <input type="text" placeholder="City name">
+        </div>
+        <div class="form-group">
+          <label>State/Province/Territory Code:</label>
+          <select>
+            <option>Select...</option>
+            <option>AL</option>
+            <option>AK</option>
+            <option>AZ</option>
+            <option>AR</option>
+            <option>CA</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Postal/ZIP Code (5 or 9 digit format):</label>
+          <input type="text" placeholder="12345 or 12345-6789">
+        </div>
+        <div class="form-group">
+          <label>Primary Contact Telephone Number (Include Area Code):</label>
+          <input type="tel" placeholder="(123) 456-7890">
+        </div>
+        <div class="form-group">
+          <label>Alternative Contact Method (Secondary Phone):</label>
+          <input type="tel" placeholder="Optional">
+        </div>
+        <div class="form-group">
+          <label>Electronic Mail Address (Email):</label>
+          <input type="email" placeholder="user@example.com">
+        </div>
+        <div class="form-group">
+          <label>Date of Birth (MM/DD/YYYY format required):</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>Social Security Number (XXX-XX-XXXX):</label>
+          <input type="text" placeholder="###-##-####">
+        </div>
+      </div>
+
+      <!-- More Dense Content for Scrolling -->
+      <div class="dense-section">
+        <h2>Additional Complex Content (Requires Scrolling)</h2>
+        <p>The implementation of recursive algorithms in computational complexity theory demonstrates the intrinsic relationship between time complexity and space complexity in algorithmic design. When analyzing the asymptotic behavior of recursive functions, we must consider both the depth of recursion and the auxiliary space required at each recursive call.</p>
+        <p>Dynamic programming optimization techniques leverage memoization strategies to transform exponential-time algorithms into polynomial-time solutions by eliminating redundant subproblem computations. This trade-off between time and space complexity exemplifies fundamental principles in algorithm design and analysis.</p>
+        <p>The master theorem provides a systematic approach for analyzing divide-and-conquer algorithms, enabling practitioners to determine time complexity without explicit recursion tree analysis. However, its applicability is limited to recurrence relations that conform to specific structural patterns.</p>
+        <p>Graph traversal algorithms, including depth-first search and breadth-first search, exhibit distinct characteristics in terms of memory usage and exploration patterns. The choice between these approaches depends on problem-specific requirements such as path optimality, memory constraints, and the structure of the search space.</p>
+      </div>
+
+    </div>
+
+    <!-- Sidebar with Clutter -->
+    <div class="sidebar">
+      <div class="ad-block">
+        <p><strong>ADVERTISEMENT</strong></p>
+        <p>Click here for amazing deals!</p>
+        <p style="font-size: 8px;">Limited time offer</p>
+      </div>
+
+      <h3>Quick Actions</h3>
+      <button class="sidebar-button">Subscribe Now</button>
+      <button class="sidebar-button">Share Article</button>
+      <button class="sidebar-button">Save for Later</button>
+      <button class="sidebar-button">Print Page</button>
+      <button class="sidebar-button">Email Link</button>
+      <button class="sidebar-button">Report Issue</button>
+      <button class="sidebar-button">Translate</button>
+      <button class="sidebar-button">Text Size</button>
+      <button class="sidebar-button">Dark Mode</button>
+      <button class="sidebar-button">Settings</button>
+
+      <div class="ad-block" style="margin-top: 15px;">
+        <p><strong>SPONSORED</strong></p>
+        <p>You won't believe this!</p>
+        <p style="font-size: 8px;">Click to learn more</p>
+      </div>
+
+      <h3 style="margin-top: 15px;">Related Links</h3>
+      <button class="sidebar-button">Article 1</button>
+      <button class="sidebar-button">Article 2</button>
+      <button class="sidebar-button">Article 3</button>
+      <button class="sidebar-button">Article 4</button>
+      <button class="sidebar-button">Article 5</button>
+    </div>
+  </div>
+
+  <!-- Floating Distracting Elements -->
+  <div class="floating-element floating-1">🔔 New Alert!</div>
+  <div class="floating-element floating-2">⚡ Limited Offer</div>
+  <div class="floating-element floating-3">💬 3 Messages</div>
+
+</body>
+</html>

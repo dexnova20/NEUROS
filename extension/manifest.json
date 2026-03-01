@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "NeuroAdaptiveOS",
+  "version": "1.0",
+  "description": "Detects cognitive friction and adapts UI in real-time",
+  
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  
+  "host_permissions": [
+    "http://localhost:5000/*"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "browser/chromeAdapter.js",
+        "core/scoring.js",
+        "core/personalization.js",
+        "core/adaptation.js",
+        "core/focusMode.js",
+        "content.js"
+      ],
+      "css": ["styles.css"]
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "NeuroAdaptiveOS",
+    "default_icon": {
+      "16": "logo-icon.svg",
+      "48": "logo-icon.svg",
+      "128": "logo-icon.svg"
+    }
+  },
+  
+  "icons": {
+    "16": "logo-icon.svg",
+    "48": "logo-icon.svg",
+    "128": "logo-icon.svg"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["icon3.jfif", "logo-icon.svg"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

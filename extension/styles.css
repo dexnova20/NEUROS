@@ -1,0 +1,19 @@
+/* ============================================
+   STYLES.CSS - Minimal adaptive styles
+   Main styling now handled via CSS variables in content.js
+   ============================================ */
+
+/* Root-level CSS variables (set dynamically by content.js) */
+:root {
+  --neuro-font-scale: 1;
+  --neuro-line-height: 1.5;
+  --neuro-letter-spacing: 0em;
+  --neuro-contrast: 1;
+}
+
+/* Smooth transitions for all text elements */
+body, p, span, div, article, section, li, td, th, h1, h2, h3, h4, h5, h6 {
+  transition: font-size 400ms cubic-bezier(0.4, 0.0, 0.2, 1),
+              line-height 400ms cubic-bezier(0.4, 0.0, 0.2, 1),
+              letter-spacing 400ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>NeuroAdaptiveOS</title>
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+    
+    h1 {
+      font-size: 18px;
+      margin: 0 0 15px 0;
+      color: #333;
+    }
+    
+    .status {
+      padding: 10px;
+      background: #e8f5e9;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+    
+    .status.active {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    
+    .stats {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .stats div {
+      margin: 8px 0;
+    }
+    
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    
+    button:hover {
+      background: #1565c0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 NeuroAdaptiveOS</h1>
+  
+  <div class="status active" id="status">
+    ✅ Active - Monitoring cognitive load
+  </div>
+  
+  <div class="stats">
+    <div><strong>Total Predictions:</strong> <span id="totalPredictions">0</span></div>
+    <div><strong>Backend:</strong> <span id="backendStatus">Checking...</span></div>
+  </div>
+  
+  <button id="testBtn">Test Backend Connection</button>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
